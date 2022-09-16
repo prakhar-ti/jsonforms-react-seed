@@ -1,55 +1,355 @@
 {
-  "type": "VerticalLayout",
+  "type": "Categorization",
   "elements": [
     {
-      "type": "Control",
-      "label": "Completed",
-      "scope": "#/properties/done"
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/name"
-    },
-    {
-      "type": "HorizontalLayout",
+      "type": "Category",
+      "label": "Project Information",
       "elements": [
         {
-          "type": "Control",
-          "scope": "#/properties/due_date"
-        },
-        {
-          "type": "Control",
-          "scope": "#/properties/rating"
+          "type":"VerticalLayout",
+          "elements":[
+            {
+              "type": "Control",
+              "scope": "#/properties/project_name"
+            },
+
+            {
+              "type": "Control",
+              "scope": "#/properties/ci_cd"
+            },
+
+            {
+              "type": "Control",
+              "scope": "#/properties/documentation"
+            },
+
+            {
+              "type": "Control",
+              "scope": "#/properties/collaboration"
+            }
+              
+
+            
+          ]
         }
       ]
     },
+
+
+
     {
-      "type": "HorizontalLayout",
+      "type": "Category",
+      "label": "CI/CD",
       "elements": [
         {
           "type": "Control",
-          "scope": "#/properties/recurrence"
+          "scope": "#/properties/ci_cd_options/properties/linting"
         },
+
         {
           "type": "Control",
-          "scope": "#/properties/recurrence_interval",
+          "scope": "#/properties/ci_cd_options/properties/testing"
+        },
+
+        {
+          "type": "Control",
+          "scope": "#/properties/ci_cd_options/properties/code_analysis"
+        },
+
+        {
+          "type": "Control",
+          "scope": "#/properties/ci_cd_options/properties/deployment"
+        }
+      ],
+      "rule": {
+        "effect": "SHOW",
+        "condition": {
+          "scope": "#/properties/ci_cd",
+          "schema": {
+            "const": true
+          }
+        }
+      }
+    },
+
+
+
+    {
+      "type": "Category",
+      "label": "Documentation",
+      "elements": [
+
+        {
+          "type":"Control",
+          "scope": "#/properties/documentation_options/properties/google_site"
+        },
+
+        {
+          "type":"Control",
+          "scope": "#/properties/documentation_options/properties/drive_folder"
+        },
+
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/documentation_options/properties/drive_folder_options/properties/6_pager"
+            },
+
+            {
+              "type": "Control",
+              "scope": "#/properties/documentation_options/properties/drive_folder_options/properties/1_pager"
+            },
+
+            {
+              "type": "Control",
+              "scope": "#/properties/documentation_options/properties/drive_folder_options/properties/competitor_analysis"
+            },
+
+            {
+              "type": "Control",
+              "scope": "#/properties/documentation_options/properties/drive_folder_options/properties/experiment"
+            },
+
+            {
+              "type": "Control",
+              "scope": "#/properties/documentation_options/properties/drive_folder_options/properties/itd"
+            }
+          ],
           "rule": {
-            "effect": "HIDE",
+            "effect": "SHOW",
             "condition": {
-              "type": "LEAF",
-              "scope": "#/properties/recurrence",
-              "expectedValue": "Never"
+              "scope": "#/properties/documentation_options/properties/drive_folder",
+              "schema": {
+                "const": true
+              }
             }
           }
         }
-      ]
+      ],
+      "rule": {
+        "effect": "SHOW",
+        "condition": {
+          "scope": "#/properties/documentation",
+          "schema": {
+            "const": true
+          }
+        }
+      }
     },
+
+
+
     {
-      "type": "Control",
-      "scope": "#/properties/description",
-      "options": {
-        "multi": true
+      "type": "Category",
+      "label": "Collaboration",
+      "elements": [
+          {
+            "type": "Control",
+            "scope": "#/properties/collaboration_options/properties/github_repo"
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/collaboration_options/properties/github_project_board"
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/collaboration_options/properties/google_chat_space"
+          }
+      ],
+      "rule": {
+        "effect": "SHOW",
+        "condition": {
+          "scope": "#/properties/collaboration",
+          "schema": {
+            "const": true
+          }
+        }
+      }
+    },
+
+
+    {
+      "type": "Category",
+      "label": "App",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/custom_container"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/app_name",
+          "rule": {
+            "effect":"HIDE",
+            "condition": {
+              "scope": "#/properties/custom_container",
+              "schema": { 
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/app_type",
+          "rule": {
+            "effect":"HIDE",
+            "condition": {
+              "scope": "#/properties/custom_container",
+              "schema": { 
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/custom_container_link" ,
+          "rule": {
+            "effect":"SHOW",
+            "condition": {
+              "scope": "#/properties/custom_container",
+              "schema": { 
+                "const": false
+              }
+            }
+          }
+        }
+      ],
+
+      "rule": {
+        "effect": "HIDE",
+        "condition": {
+          "scope": "#/properties/custom_container",
+          "schema": {
+            "const": true
+          }
+        }
+      }
+    },
+
+    {
+      "type": "Category",
+      "label": "Django",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/dockerfile"
+        },
+
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/gitpod"
+        },
+
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/iac"
+        },
+
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/debugger"
+        },
+
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/secret_manager"
+        },
+
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/database_type"
+        },
+
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/auth"
+        },
+        
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/auth_options/properties/auth_type",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#/properties/app_options/properties/django_configurations/properties/auth",
+              "schema": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/logging"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/tracing"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/tests"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/linter"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/app_options/properties/django_configurations/properties/linter_options",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#/properties/app_options/properties/django_configurations/properties/linter",
+              "schema": {
+                "const": true
+              }
+            }
+          }
+        }
+        
+      ],
+      "rule": {
+        "effect": "SHOW",
+        "condition": {
+          "scope": "#/properties/app_options/properties/app_type",
+          "schema": {
+            "const": "Django (Recommended for API servers)"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "Category",
+      "label": "Deployment",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/deployment_options/properties/deployment_type"
+        }
+      ],
+      "rule": {
+        "effect": "SHOW",
+        "condition": {
+          "scope": "#/properties/ci_cd_options/properties/deployment",
+          "schema": {
+            "const": true
+          }
+        }
       }
     }
-  ]
+
+  ],
+
+
+  "options": {
+    "variant": "stepper",
+    "showNavButtons": true
+  }
 }
+  

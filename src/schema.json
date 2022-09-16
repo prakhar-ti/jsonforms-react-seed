@@ -1,32 +1,282 @@
 {
   "type": "object",
   "properties": {
-    "name": {
+    "project_name": {
+      "title": "Project Name",
       "type": "string",
-      "minLength": 1
+      "minLength": 3
     },
-    "description": {
-      "title": "Long Description",
-      "type": "string"
-    },
-    "done": {
+
+    "documentation": {
+      "title": "Documentation",
       "type": "boolean"
     },
-    "due_date": {
-      "type": "string",
-      "format": "date"
+
+    "collaboration": {
+      "title": "Collaboration",
+      "type": "boolean"
     },
-    "rating": {
-      "type": "integer",
-      "maximum": 5
+
+    "ci_cd": {
+      "title": "CI/ CD",
+      "type": "boolean"
     },
-    "recurrence": {
-      "type": "string",
-      "enum": ["Never", "Daily", "Weekly", "Monthly"]
+
+    "custom_container": {
+      "title": "Custom Container", 
+      "type": "boolean"
     },
-    "recurrence_interval": {
-      "type": "integer"
+
+    "custom_container_link": {
+      "title": "Custom Container Link", 
+      "type": "string"
+    },
+
+
+    "collaboration_options": {
+      "properties": {
+        "github_repo": {
+          "title": "Create GitHub Repo", 
+          "type": "boolean"
+        },
+        "github_project_board": {
+          "title": "Create GitHub Project Board", 
+          "type": "boolean"
+        },
+        "google_chat_space": {
+          "title": "Create Google Chat Space", 
+          "type": "boolean"
+        }
+      }
+    },
+
+
+    "documentation_options": {
+      "type": "object",
+      "properties": {
+        "google_site": {
+          "title": "Create a Google Site",
+          "type": "boolean"
+        },
+
+        "drive_folder": {
+          "title": "Create Drive Folder",
+          "type": "boolean"
+        },
+
+        "drive_folder_options": {
+          "type": "object",
+          "properties": {
+            "6_pager": {
+              "title": "6 Pager Documentation",
+              "type": "boolean"
+            },
+
+            "1_pager": {
+              "title": "1 Pager Documentation",
+              "type": "boolean"
+            },
+
+            "competitor_analysis": {
+              "title": "Competitor Analysis",
+              "type": "boolean"
+            },
+
+            "experiment": {
+              "title": "Experiment Template",
+              "type": "boolean"
+            },
+
+            "itd": {
+              "title": "ITD Template",
+              "type": "boolean"
+            },
+
+            "market_research": {
+              "title": "Market Research Template",
+              "type": "boolean"
+            },
+
+            "research": {
+              "title": "Research Template",
+              "type": "boolean"
+            },
+
+            "user_stories": {
+              "title": "User Stories Template",
+              "type": "boolean"
+            },
+
+            "github_readme": {
+              "title": "GitHub Readme",
+              "type": "boolean"
+            },
+
+            "swagger": {
+              "title": "Swagger",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+
+
+    "ci_cd_options": {
+      "type": "object",
+      "properties": {
+        "linting" : {
+          "title": "Lint the Code",
+          "type":"boolean"
+        },
+
+        "testing" : {
+          "title": "Run Tests",
+          "type":"boolean"
+        },
+
+        "code_analysis" : {
+          "title": "Code Analysis",
+          "type":"boolean"
+        },
+
+        "deployment" : {
+          "title": "Setup Deployment",
+          "type":"boolean"
+        }
+      }
+    },
+
+    
+    "app_options": {
+      "properties": {
+        "app_name": {
+          "title": "App Name",
+          "type": "string",
+          "minLength": 3
+        },
+
+        "app_type": {
+          "title": "Choose App",
+          "type": "string",
+          "enum": ["Django (Recommended for API servers)", "TypeScript (Recommended for ServerLess)"]
+        },
+
+        "django_configurations": {
+          "type": "object",
+          "properties": {
+            "dockerfile": {
+              "title": "Add a Dockerfile",
+              "type": "boolean"
+            },
+
+            "gitpod": {
+              "title": "Add a .gitpod Config",
+              "type": "boolean"
+            },
+
+            "iac": {
+              "title": "Generate IaC (CDK)",
+              "type": "boolean"
+            },
+            
+            "debugger": {
+              "title": "Setup Local Debugging (VS Code)",
+              "type": "boolean"
+            },
+
+            "secret_manager": {
+              "title": "Use Secret Manager in Prod? (Recommended)",
+              "type": "boolean"
+            },
+
+            "quicksight": {
+              "title": "Will use QuickSight?",
+              "type": "boolean"
+            },
+
+            "database_type": {
+              "type": "string",
+              "enum": ["SQLite", "PostgreSQL", "DynamoDB"]
+            },
+
+            "auth": {
+              "type": "boolean"
+            },
+
+            "auth_options": {
+              "type": "object",
+              "properties": {
+                "auth_type": {
+                  "type": "string",
+                  "enum": ["OAuth (Compatible with Social Apps)", "Cognito (Recommended for Role Based)", "DevConnect (Recommended for Internal Apps)"]
+                }
+              }
+            },
+
+            "logging": {
+              "title": "Set-up Logging",
+              "type": "boolean"
+            },
+
+            "logging_options": {
+              "type": "object",
+              "properties": {
+                "log_type": {
+                  "type": "string",
+                  "enum": ["Default", "Structlog"]
+                }
+              }
+            },
+
+            "tracing": {
+              "title": "Set-up Tracing",
+              "type": "boolean"
+            },
+
+            "tracing_options": {
+              "type": "object",
+              "properties": {
+                "log_type": {
+                  "type": "string",
+                  "enum": ["Default", "X-Ray"]
+                }
+              }
+            },
+
+            "tests": {
+              "type": "boolean"
+            },
+
+            "tests_options": {
+              "type": "string",
+              "enum": ["PyTest", "Django Tests"]
+            },
+
+            "linter": {
+              "type": "boolean"
+            },
+
+            "linter_options": {
+              "type": "string",
+              "enum": ["PyLint", "Black", "PyFlakes", "Isort"]
+            }
+          }
+          
+        }
+      }
+    },
+
+    "deployment_options": {
+      "type": "object",
+      "properties": {
+        "deployment_type": {
+          "type": "string",
+          "enum": ["ECS", "EKS"]
+        }
+      } 
     }
   },
-  "required": ["name", "due_date"]
+  
+  "required": []
 }
