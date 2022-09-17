@@ -3,14 +3,14 @@
   "elements": [
     {
       "type": "Category",
-      "label": "Project Information",
+      "label": "Project",
       "elements": [
         {
           "type":"VerticalLayout",
           "elements":[
             {
               "type": "Control",
-              "scope": "#/properties/project_name"
+              "scope": "#/properties/project/properties/name"
             },
 
             {
@@ -147,10 +147,6 @@
       "elements": [
           {
             "type": "Control",
-            "scope": "#/properties/collaboration_options/properties/github_repo"
-          },
-          {
-            "type": "Control",
             "scope": "#/properties/collaboration_options/properties/github_project_board"
           },
           {
@@ -178,9 +174,10 @@
           "type": "Control",
           "scope": "#/properties/custom_container"
         },
+
         {
           "type": "Control",
-          "scope": "#/properties/app_options/properties/app_name",
+          "scope": "#/properties/app_options/properties/apps",
           "rule": {
             "effect":"HIDE",
             "condition": {
@@ -191,19 +188,7 @@
             }
           }
         },
-        {
-          "type": "Control",
-          "scope": "#/properties/app_options/properties/app_type",
-          "rule": {
-            "effect":"HIDE",
-            "condition": {
-              "scope": "#/properties/custom_container",
-              "schema": { 
-                "const": true
-              }
-            }
-          }
-        },
+
         {
           "type": "Control",
           "scope": "#/properties/custom_container_link" ,
@@ -212,22 +197,12 @@
             "condition": {
               "scope": "#/properties/custom_container",
               "schema": { 
-                "const": false
+                "const": true
               }
             }
           }
         }
-      ],
-
-      "rule": {
-        "effect": "HIDE",
-        "condition": {
-          "scope": "#/properties/custom_container",
-          "schema": {
-            "const": true
-          }
-        }
-      }
+      ]
     },
 
     {
@@ -282,6 +257,7 @@
             }
           }
         },
+
         {
           "type": "Control",
           "scope": "#/properties/app_options/properties/django_configurations/properties/logging"
@@ -316,9 +292,9 @@
       "rule": {
         "effect": "SHOW",
         "condition": {
-          "scope": "#/properties/app_options/properties/app_type",
+          "scope": "#/properties/app_options/properties/apps/items/properties/name",
           "schema": {
-            "const": "Django (Recommended for API servers)"
+            
           }
         }
       }
