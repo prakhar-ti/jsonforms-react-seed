@@ -1,10 +1,35 @@
 {
   "type": "object",
   "properties": {
-    "project_name": {
+    "project": {
       "title": "Project Name",
-      "type": "string",
-      "minLength": 3
+      "type": "object",
+      "properties": {
+        "name": {
+          "type":"string",
+          "label": "Project Name"
+        },
+
+        "slug": {
+          "type": "string",
+          "label": "Project Slug"
+        },
+
+        "description": {
+          "type": "string",
+          "label": "Project Description"
+        },
+
+        "owner": {
+          "type": "string",
+          "label": "Project Owner"
+        },
+
+        "contact_email": {
+          "type": "string",
+          "label": "Contact EMail"
+        }
+      }
     },
 
     "documentation": {
@@ -35,10 +60,7 @@
 
     "collaboration_options": {
       "properties": {
-        "github_repo": {
-          "title": "Create GitHub Repo", 
-          "type": "boolean"
-        },
+
         "github_project_board": {
           "title": "Create GitHub Project Board", 
           "type": "boolean"
@@ -150,21 +172,119 @@
     
     "app_options": {
       "properties": {
-        "app_name": {
-          "title": "App Name",
-          "type": "string",
-          "minLength": 3
-        },
 
-        "app_type": {
-          "title": "Choose App",
-          "type": "string",
-          "enum": ["Django (Recommended for API servers)", "TypeScript (Recommended for ServerLess)"]
+        "apps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "enum": ["Django (Recommended for API servers)", "React (Recommended for Frontend)"]
+              }
+            }
+          }
         },
 
         "django_configurations": {
           "type": "object",
           "properties": {
+
+            "repo_name": {
+              "type": "string"
+            },
+            
+            "organization_name": {
+              "type": "string"
+            },
+
+            "testing": {
+              "type": "object",
+              "properties": {
+
+                "sample_tests": {
+                  "type": "boolean"
+                },
+
+                "test_runner_script": {
+                  "type": "object"
+                }
+              }
+            },
+
+            "logging": {
+              "type": "object",
+              "properties": {
+
+                "enabled": {
+                  "type": "boolean"
+                },
+
+                "logging_type": {
+                  "type":"string",
+                  "enum": ["Default", "Structlog"]
+                }
+              }
+            },
+
+            "tracing": {
+              "type": "object",
+              "properties": {
+                
+                "enabled":{
+                  "type": "boolean"
+                },
+
+                "log_type": {
+                  "type": "string",
+                  "enum": ["Default", "X-Ray"]
+                }
+
+              }
+            },
+
+            "authentication": {
+              "type": "object",
+              "properties": {
+
+                "rest": {
+                  "type": "boolean"
+                },
+
+                "aws_cognito": {
+                  "type":"object",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean"
+                    },
+
+                    "key": {
+                      "type": "string"
+                    }
+                  }
+                },
+
+                "social": {
+                  "type":"object",
+                  "properties": {
+                      "enabled": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                },
+
+                "devconnect": {
+                  "type":"object",
+                  "properties": {
+                    "enabled": {
+                      "type":"boolean"
+                    }
+                  }
+                }
+              }
+            },
+
             "dockerfile": {
               "title": "Add a Dockerfile",
               "type": "boolean"
@@ -180,77 +300,46 @@
               "type": "boolean"
             },
             
-            "debugger": {
+            "debugging": {
               "title": "Setup Local Debugging (VS Code)",
               "type": "boolean"
             },
 
             "secret_manager": {
-              "title": "Use Secret Manager in Prod? (Recommended)",
+              "title": "Use Secret Manager in Production (Recommended)",
               "type": "boolean"
             },
 
             "quicksight": {
-              "title": "Will use QuickSight?",
+              "title": "Quicksight",
               "type": "boolean"
             },
 
             "database_type": {
               "type": "string",
               "enum": ["SQLite", "PostgreSQL", "DynamoDB"]
-            },
+            },      
 
-            "auth": {
-              "type": "boolean"
-            },
-
-            "auth_options": {
+            "readme": {
               "type": "object",
               "properties": {
-                "auth_type": {
-                  "type": "string",
-                  "enum": ["OAuth (Compatible with Social Apps)", "Cognito (Recommended for Role Based)", "DevConnect (Recommended for Internal Apps)"]
+                
+                "enabled": {
+                  "type": "boolean"
+                },
+
+                "local_setup": {
+                  "type": "boolean"
+                },
+
+                "folder_structure": {
+                  "type": "boolean"
+                },
+
+                "demo_curl_requests": {
+                  "type": "boolean"
                 }
               }
-            },
-
-            "logging": {
-              "title": "Set-up Logging",
-              "type": "boolean"
-            },
-
-            "logging_options": {
-              "type": "object",
-              "properties": {
-                "log_type": {
-                  "type": "string",
-                  "enum": ["Default", "Structlog"]
-                }
-              }
-            },
-
-            "tracing": {
-              "title": "Set-up Tracing",
-              "type": "boolean"
-            },
-
-            "tracing_options": {
-              "type": "object",
-              "properties": {
-                "log_type": {
-                  "type": "string",
-                  "enum": ["Default", "X-Ray"]
-                }
-              }
-            },
-
-            "tests": {
-              "type": "boolean"
-            },
-
-            "tests_options": {
-              "type": "string",
-              "enum": ["PyTest", "Django Tests"]
             },
 
             "linter": {
@@ -260,11 +349,9 @@
             "linter_options": {
               "type": "string",
               "enum": ["PyLint", "Black", "PyFlakes", "Isort"]
-            }
           }
-          
         }
-      }
+       }
     },
 
     "deployment_options": {
@@ -276,7 +363,5 @@
         }
       } 
     }
-  },
-  
-  "required": []
+  }
 }
